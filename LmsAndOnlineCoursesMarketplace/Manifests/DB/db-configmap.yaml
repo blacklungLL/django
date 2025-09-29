@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: postgres-config
-  namespace: lms-db
+  namespace: db
 data:
-  host: postgres-headless-svc.lms-db.svc.cluster.local
+  host: postgres-headless-svc.db.svc.cluster.local
   port: "5432"

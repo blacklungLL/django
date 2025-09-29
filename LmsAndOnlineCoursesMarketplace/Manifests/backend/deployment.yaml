@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: lms-app
-        image: lms-marketplace:latest
+        image: 1blacklung1/lms-marketplace:latest
         imagePullPolicy: "IfNotPresent"
         ports:
         - containerPort: 8080

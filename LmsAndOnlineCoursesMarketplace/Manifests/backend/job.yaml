@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
       - name: lms-migrations
-        image: lms-marketplace:latest
+        image: 1blacklung1/lms-marketplace:latest
         imagePullPolicy: "IfNotPresent"
         command: ["dotnet", "LmsAndOnlineCoursesMarketplace.MVC.dll", "migrate"]
         env:
