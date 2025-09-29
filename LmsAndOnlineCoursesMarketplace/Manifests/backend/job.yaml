@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: lms-migrations
+  namespace: lms-backend
+spec:
+  template:
+    spec:
+      containers:
+      - name: lms-migrations
+        image: lms-marketplace:latest
+        imagePullPolicy: "IfNotPresent"
+        command: ["dotnet", "LmsAndOnlineCoursesMarketplace.MVC.dll", "migrate"]
+        env:
+        - name: ConnectionStrings__DefaultConnection
+          valueFrom:
+            secretKeyRef:
+              name: secret
+              key: connection-string
+      restartPolicy: Never
+  backoffLimit: 4

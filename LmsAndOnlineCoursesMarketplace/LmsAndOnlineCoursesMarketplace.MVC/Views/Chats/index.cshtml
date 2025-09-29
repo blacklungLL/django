@@ -1,0 +1,121 @@
+@model LmsAndOnlineCoursesMarketplace.MVC.Models.Chat.ChatVM
+
+@{
+    ViewData["Title"] = "Chats";
+}
+
+<head>
+    <title>Cursus - Chats</title>
+    <link href="~/assets/css/instructor-dashboard.css" rel="stylesheet">
+    <link href="~/assets/css/instructor-responsive.css" rel="stylesheet">
+</head>
+
+<div class="wrapper">
+    <div class="sa4d25">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="st_title"><i class="uil uil-comments"></i> Messages</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="all_msg_bg">
+                        <div class="row no-gutters">
+                            <div class="col-xl-4 col-lg-5 col-md-12">
+                                <div class="msg_search">
+                                    <div class="ui search focus">
+                                        <div class="ui left icon input swdh11 swdh15">
+                                            <input class="prompt srch_explore" type="text" placeholder="Search Messages...">
+                                            <i class="uil uil-search-alt icon icon8"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul id="userList" class="group_messages">
+                                    @if (Model.Users != null && Model.Users.Any())
+                                    {
+                                        foreach (var user in Model.Users)
+                                        {
+                                            <li class="chat-user chat__message__dt"
+                                                data-user-id="@user.Id"
+                                                onclick="openChat(@user.Id, '@user.Name')"
+                                                style="cursor: pointer;">
+                                                <div class="user-status">
+                                                    <div class="user-avatar">
+                                                        <img src="@Url.Content($"~/assets/images/left-imgs/img-{user.Id}.jpg")" alt="@user.Name">
+                                                        <div class="msg__badge">1</div>
+                                                    </div>
+                                                    <p class="user-status-title"><span class="bold">@user.Name</span></p>
+                                                    <p class="user-status-text">Последнее сообщение...</p>
+                                                    <p class="user-status-time floaty">2 min ago</p>
+                                                </div>
+                                            </li>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <p class="no-chats">Нет доступных собеседников</p>
+                                    }
+                                </ul>
+                            </div>
+                            @if (Model.SelectedUserId.HasValue)
+                            {
+                                <div class="col-xl-8 col-lg-7 col-md-12">
+                                    <div class="chatbox_right">
+                                        <div class="chat_header">
+                                            <div class="user-status" id="chatHeader">
+                                                <div class="user-avatar">
+                                                    <img src="@Url.Content($"~/assets/images/left-imgs/img-{Model.SelectedUserId}.jpg")" id="chatUserAvatar" alt="User Avatar">
+                                                </div>
+                                                <p class="user-status-title">
+                                                    <span class="bold" id="chatUserName">@Model.SelectedUserName</span>
+                                                </p>
+                                                <p class="user-status-tag online">Online</p>
+                                            </div>
+                                        </div>
+                                        <div class="messages-line simplebar-content-wrapper2 scrollstyle_4">
+                                            <div id="messageArea" class="mCustomScrollbar"></div>
+                                        </div>
+                                        <div id="chatInput" class="message-send-area" data-recipient="@Model.SelectedUserId">
+                                            <form onclick="sendMessage(event)">
+                                                <div class="mf-field">
+                                                    <div class="ui search focus input__msg">
+                                                        <div class="ui left icon input swdh19">
+                                                            <input type="text" id="messageInput" placeholder="Write a message...">
+                                                        </div>
+                                                    </div>
+                                                    <button class="add_msg" type="submit">
+                                                        <i class="uil uil-message"></i>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-xl-8 col-lg-7 col-md-12">
+                                    <div class="chatbox_right">
+                                        <p>Выберите пользователя для начала чата</p>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Body End -->
+<script src="~/assets/js/vertical-responsive-menu.min.js"></script>
+<script src="~/assets/js/jquery-3.7.1.min.js"></script>
+<script src="~/assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="~/assets/lib/OwlCarousel/owl.carousel.js"></script>
+<script src="~/assets/lib/bootstrap-select/docs/docs/dist/js/bootstrap-select.js"></script>
+<script src="~/assets/lib/semantic/semantic.min.js"></script>
+<script src="~/assets/js/custom1.js"></script>
+<script src="~/assets/js/night-mode.js"></script>
+<script src="~/assets/js/jquery.mCustomScrollbar.js"></script>
+<script src="~/assets/js/chat.js"></script>

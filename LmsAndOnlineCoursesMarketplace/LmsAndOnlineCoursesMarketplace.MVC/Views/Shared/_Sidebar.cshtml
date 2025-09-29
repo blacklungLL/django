@@ -1,0 +1,92 @@
+<nav class="vertical_nav">
+    <div class="left_section menu_left" id="js-menu" >
+        <div class="left_section">
+            <ul>
+                <li class="menu--item">
+                    <a href="/" class="menu--link active" title="Home">
+                        <i class='uil uil-home-alt menu--icon'></i>
+                        <span class="menu--label">Home</span>
+                    </a>
+                </li>
+                <li class="menu--item">
+                    <a asp-controller="LiveStreams" asp-action="Index" class="menu--link" title="Live Streams">
+                        <i class='uil uil-kayak menu--icon'></i>
+                        <span class="menu--label">Live Streams</span>
+                    </a>
+                </li>
+                <li class="menu--item">
+                    <a asp-controller="Chats" asp-action="Index" class="menu--link" title="Explore">
+                        <i class='uil uil-envelope-alt menu--icon'></i>
+                        <span class="menu--label">Chats</span>
+                    </a>
+                </li>
+                <li class="menu--item">
+                    <a asp-controller="ShoppingCart" asp-action="Index" class="menu--link" title="Saved Courses">
+                        <i class="uil uil-shopping-cart-alt menu--icon"></i>
+                        <span class="menu--label">Shopping Cart</span>
+                    </a>
+                </li>
+                <li class="menu--item  menu--item__has_sub_menu">
+                    <label class="menu--link" title="Pages">
+                        <i class='uil uil-file menu--icon'></i>
+                        <span class="menu--label">Pages</span>
+                    </label>
+                    <ul class="sub_menu">
+                        <li class="sub_menu--item">
+                            <a asp-controller="Login" asp-action="Index" class="sub_menu--link">Login</a>
+                        </li>
+                        <li class="sub_menu--item">
+                            <a asp-controller="Registration" asp-action="Index" class="sub_menu--link">Registration</a>
+                        </li>
+                        <li class="sub_menu--item">
+                            <a asp-area="Admin" asp-controller="Courses" asp-action="Index" class="sub_menu--link">View your courses</a>
+                        </li>
+                        <li class="sub_menu--item">
+                            <a asp-controller="AddStreaming" asp-action="Index" class="sub_menu--link">Add video to Stream</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="left_section">
+            <h6 class="left_title">SUBSCRIPTIONS</h6>
+            <ul>
+                @foreach (var sub in ViewBag.Subscriptions)
+                {
+                    <li class="menu--item">
+                        <a asp-controller="OtherUserProfile" asp-action="Index" asp-route-Id="@sub.Id" class="menu--link user_img">
+                            <img src="@Url.Content($"~/assets/images/left-imgs/img-{sub.Id}.jpg")" alt="">
+                            @sub.Name
+                            <div class="alrt_dot"></div>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>    
+        <div class="left_section pt-2">
+            <ul>
+                <li class="menu--item">
+                    <a asp-controller="Settings" asp-action="Index" class="menu--link" title="Setting">
+                        <i class='uil uil-cog menu--icon'></i>
+                        <span class="menu--label">Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="left_footer">
+            <ul>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Press</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Advertise</a></li>
+                <li><a href="#">Developers</a></li>
+                <li><a href="#">Copyright</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms</a></li>
+            </ul>
+            <div class="left_footer_content">
+                <p>© 2024 <strong>Cursus</strong>. All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+</nav>

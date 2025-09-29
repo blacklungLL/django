@@ -1,0 +1,178 @@
+@model LmsAndOnlineCoursesMarketplace.MVC.Models.Course.CourseVM
+
+@{
+    ViewData["Title"] = "Course";
+}
+<div class="wrapper _bg4586">
+    <div class="_215b01">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section3125">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-4 col-lg-5 col-md-6">
+                                <div class="preview_video">
+                                    <a href="#" class="fcrse_img" data-bs-toggle="modal" data-bs-target="#videoModal">
+                                        <img src="@Model.ImageLink" alt="@Model.Title">
+                                        <div class="course-overlay">
+                                            <span class="play_btn1"><i class="uil uil-play"></i></span>
+                                            <span class="_215b02">Preview this course</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="_215b10">
+                                    <a href="#" class="_215b11">
+                                        <span><i class="uil uil-heart"></i></span>Save
+                                    </a>
+                                    <a href="#" class="_215b12">
+                                        <span><i class="uil uil-windsock"></i></span>Report abuse
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xl-8 col-lg-7 col-md-6">
+                                <div class="_215b03">
+                                    <h2>@Model.Title</h2>
+                                    <span class="_215b04">@Model.ShortDescription</span>
+                                </div>
+                                <div class="_215b05">
+                                    <div class="crse_reviews mr-2">
+                                        <i class="uil uil-star">@Model.Rating </i>
+                                    </div>
+                                    (@Model.RatingsCnt ratings)
+                                </div>
+                                <div class="_215b05">
+                                    @Model.Views students enrolled
+                                </div>
+                                <div class="_215b05">
+                                    <i class="uil uil-clock"></i>Last updated @Model.LastUpdate
+                                    <div class="crse_reviews">
+                                        <i class="uil uil-globe"></i>@Model.Language
+                                    </div>
+                                </div>
+                                <div class="_215b06">
+                                    <div class="_215b07">
+                                        <span><i class="uil uil-clock"></i></span>
+                                        @Model.Duration
+                                    </div>
+                                    <div class="_215b08">
+                                        <span><i class="uil uil-tag-alt"></i></span>
+                                        @Model.Category
+                                    </div>
+                                    <div class="_215b08">
+                                        <span><i class="uil uil-dollar-sign"></i></span>
+                                        $@Model.Price
+                                    </div>
+                                </div>
+                                <ul class="_215b31">
+                                    <li>
+                                        <a class="btn_buy btn btn-danger"
+                                           asp-controller="ShoppingCart"
+                                           asp-action="Index"
+                                           asp-route-courseId="@Model.Id">
+                                            Buy Now
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="_215fgt1">
+                                    30-Day Money-Back Guarantee
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="_215b17 _byt1458 mt-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="user_dt5">
+                        <div class="user_dt_left">
+                            <div class="live_user_dt">
+                                <div class="user_img5">
+                                    <img src="@Url.Content($"~/assets/images/left-imgs/img-{Model.UserId}.jpg")" alt="">
+                                </div>
+                                <div class="user_cntnt">
+                                    <a asp-controller="OtherUserProfile" asp-action="Index" asp-route-id="@Model.UserId">
+                                        <h4>@Model.AuthorName</h4></a>
+                                    <form asp-controller="OtherUserProfile" asp-action="Subscribe"
+                                          asp-route-userId="@Model.UserId" method="post">
+                                        <button type="submit" class="subscribe-btn">Subscribe</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="user_dt_right">
+                            <ul>
+                                <li>
+                                    <a href="#" class="lkcm152"><i class="uil uil-eye"></i><span>@Model.Views</span></a>
+                                </li>
+                                <li>
+                                    <form asp-controller="Course" asp-action="Like" method="post"
+                                          asp-route-id="@Model.Id">
+                                        <button type="submit" class="lkcm152">
+                                            <i class="uil uil-thumbs-up"></i><span>@Model.LikesCnt</span>
+                                        </button>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form asp-controller="Course" asp-action="Dislike" method="post"
+                                          asp-route-id="@Model.Id">
+                                        <button type="submit" class="lkcm152">
+                                            <i class="uil uil-thumbs-down"></i><span>@Model.DislikesCnt</span>
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="course_tabs">
+                        <nav>
+                            <div class="nav nav-tabs tab_crse justify-content-center" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-about-tab" data-bs-toggle="tab"
+                                   href="#nav-about" role="tab" aria-selected="true">About</a>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="_215b15 _byt1458">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-about" role="tabpanel">
+                            <div class="_htg451">
+                                <div class="_htg452">
+                                    <h3>Requirements</h3>
+                                    <div class="_htg455 mt-35">
+                                        @Model.Requirements
+                                    </div>
+                                </div>
+                                <div class="_htg452 mt-35">
+                                    <h3>Description</h3>
+                                    <div class="_htg455 mt-35">
+                                        @Model.Description
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Body End -->
+
+<script src="~/assets/js/vertical-responsive-menu.min.js"></script>
+<script src="~/assets/js/jquery-3.7.1.min.js"></script>
+<script src="~/assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="~/assets/lib/OwlCarousel/owl.carousel.js"></script>
+<script src="~/assets/lib/bootstrap-select/docs/docs/dist/js/bootstrap-select.js"></script>
+<script src="~/assets/lib/semantic/semantic.min.js"></script>
+<script src="~/assets/js/custom.js"></script>
+<script src="~/assets/js/night-mode.js"></script>	

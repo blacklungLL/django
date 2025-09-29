@@ -1,0 +1,110 @@
+@model LmsAndOnlineCoursesMarketplace.MVC.Models.LiveStream.LiveStreamVM
+
+@{
+	ViewData["Title"] = $"LiveStream {Model.AuthorName}";
+}
+
+<div class="wrapper">
+	
+	<div class="sa4d25">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="section3125">
+						<div class="live1452">
+							@if (!string.IsNullOrEmpty(Model.EmbedUrl))
+							{
+								<iframe src="@Model.EmbedUrl"
+								        title="YouTube video player" frameborder="0"
+								        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+								        allowfullscreen>
+								</iframe>
+							}
+							else
+							{
+								<p>Видео недоступно</p>
+							}
+						</div>
+						<div class="user_dt5">
+							<div class="user_dt_left">
+								<div class="live_user_dt">
+									<div class="user_img5">
+										<img src="@Url.Content($"~/assets/images/left-imgs/img-{Model.UserId}.jpg")" alt="">
+									</div>
+									@if (Model.UserId == ViewBag.CurrentUserId)
+									{
+										<div class="user_cntnt">
+											<h4>@Model.AuthorName</h4>
+										</div>
+									}
+									else
+									{
+										<div class="user_cntnt">
+											<h4>@Model.AuthorName</h4>
+											<a asp-controller="OtherUserProfile" asp-action="Index" asp-route-id="@Model.UserId" method="post">
+												<button class="subscribe-btn">Go to Author</button>
+											</a>
+										</div>
+									}
+								</div>
+							</div>
+							<div class="user_dt_right">
+								<ul>
+									<li>
+										<a href="#" class="lkcm152"><i class="uil uil-eye"></i><span>@Model.Views</span></a>
+									</li>
+									<li>
+										<form asp-controller="LiveStream" asp-action="GiveLike" method="post" asp-route-id="@Model.Id">
+											<button type="submit" class="lkcm152">
+												<i class="uil uil-thumbs-up"></i><span>@Model.LikesCnt</span>
+											</button>
+										</form>
+									</li>
+									<li>
+										<form asp-controller="LiveStream" asp-action="GiveDislike" method="post" asp-route-id="@Model.Id">
+											<button type="submit" class="lkcm152">
+												<i class="uil uil-thumbs-down"></i><span>@Model.DislikesCnt</span>
+											</button>
+										</form>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="section3125 mb-15 mt-20">
+						<h4 class="item_title">Live Streams</h4>
+						<a href="LiveStreams" class="see150">See all</a>
+						<div class="la5lo1">
+							<div class="owl-carousel live_stream owl-theme">
+								@foreach (var subStream in ViewBag.AllStreamers)
+								{
+									<div class="item">
+										<div class="stream_1">
+											<a asp-controller="LiveStream" asp-action="Index" asp-route-Id="@subStream.Id" class="stream_bg">
+												<img src="@Url.Content($"~/assets/images/left-imgs/img-{subStream.Avatar}.jpg")" alt="">
+												<h4>@subStream.Name</h4>
+												<p>live<span></span></p>
+											</a>
+										</div>
+									</div>
+								}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	<!-- Body End -->
+
+<script src="~/assets/js/vertical-responsive-menu.min.js"></script>
+<script src="~/assets/js/jquery-3.7.1.min.js"></script>
+<script src="~/assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="~/assets/lib/OwlCarousel/owl.carousel.js"></script>
+<script src="~/assets/lib/bootstrap-select/docs/docs/dist/js/bootstrap-select.js"></script>
+<script src="~/assets/lib/semantic/semantic.min.js"></script>
+<script src="~/assets/js/custom.js"></script>
+<script src="~/assets/js/night-mode.js"></script>	

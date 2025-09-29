@@ -1,0 +1,64 @@
+<div class="wrapper">
+	<div class="sa4d25">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xl-9 col-lg-8">
+					<div class="section3125">
+						<h4 class="item_title">All Live Streams</h4>
+						<div class="la5lo1">
+							<div class="row">
+								@foreach (var subStream in ViewBag.AllStreamers)
+								{
+									<div class="col-md-3">
+										<div class="stream_1 mb-4">
+											<a asp-controller="LiveStream" asp-action="Index" asp-route-Id="@subStream.Id" class="stream_bg">
+												<img src="@Url.Content($"~/assets/images/left-imgs/img-{subStream.Avatar}.jpg")" alt="">
+												<h4>@subStream.Name</h4>
+												<p>live<span></span></p>
+											</a>
+										</div>
+									</div>
+								}
+								<div class="col-md-12">
+									<div class="main-loader mt-20">
+										<div class="spinner">
+											<div class="bounce1"></div>
+											<div class="bounce2"></div>
+											<div class="bounce3"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-lg-4">
+					<div class="right_side">
+						<div class="fcrse_3">
+							<div class="cater_ttle">
+								<h4>Live Streaming</h4>
+							</div>
+							<div class="live_text">
+								<div class="live_icon"><i class="uil uil-kayak"></i></div>
+								<div class="live-content">
+									<p>Set up your channel and stream live to your students</p>
+									<button class="live_link" onclick="window.location.href = 'AddStreaming';">Get Started</button>
+									<span class="livinfo">Info : This feature only for 'Instructors'.</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Body End -->
+<script src="~/assets/js/vertical-responsive-menu.min.js"></script>
+<script src="~/assets/js/jquery-3.7.1.min.js"></script>
+<script src="~/assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="~/assets/lib/OwlCarousel/owl.carousel.js"></script>
+<script src="~/assets/lib/bootstrap-select/docs/docs/dist/js/bootstrap-select.js"></script>
+<script src="~/assets/lib/semantic/semantic.min.js"></script>
+<script src="~/assets/js/custom.js"></script>
+<script src="~/assets/js/night-mode.js"></script>	
