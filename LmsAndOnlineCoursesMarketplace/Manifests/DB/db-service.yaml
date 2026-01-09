@@ -8,8 +8,8 @@ spec:
   clusterIP: None
   ports:
   - name: postgresql
-    port: 5433
-    targetPort: postgresql
+    port: 5432
+    targetPort: 5432
     protocol: TCP
   selector:
     app: postgres

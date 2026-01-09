@@ -1,0 +1,20 @@
+replicaCount: 1
+
+image:
+  repository: redis/redis-stack-server
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+service:
+  type: LoadBalancer
+  port: 6379
+
+ingress:
+  enabled: false
+
+persistence:
+  enabled: true
+  size: 1Gi
+  storageClass: standard
+
+redisPassword: ""

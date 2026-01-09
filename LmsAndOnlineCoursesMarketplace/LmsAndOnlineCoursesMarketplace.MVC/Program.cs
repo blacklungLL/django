@@ -92,7 +92,7 @@ app.Use(async (context, next) =>
 {
     await next();
     
-    if (context.Response.StatusCode == 404 && !context.Request.Path.StartsWithSegments("/api"))
+    if (context.Response.StatusCode == 404 && !context.Request.Path.StartsWithSegments("/api") && !context.Response.HasStarted)
     {
         context.Response.Redirect("/errors/404.html");
     }

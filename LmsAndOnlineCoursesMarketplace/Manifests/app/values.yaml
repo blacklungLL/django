@@ -1,0 +1,101 @@
+# Общие настройки
+global:
+  image:
+    repository: 1blacklung1/lms-marketplace
+    tag: latest
+    pullPolicy: IfNotPresent
+
+# Настройки PostgreSQL (в subchart)
+postgresql:
+  enabled: true
+  auth:
+    username: postgres
+    password: postgresmaster
+    database: MarketplaceDbs
+  primary:
+    persistence:
+      enabled: true
+      size: 1Gi
+  service:
+    ports:
+      postgresql: 5432
+
+# Настройки Backend
+backend:
+  enabled: true
+  image:
+    repository: "{{ .Values.global.image.repository }}"
+    tag: "{{ .Values.global.image.tag }}"
+    pullPolicy: "{{ .Values.global.image.pullPolicy }}"
+  service:
+    type: NodePort
+    port: 80
+    targetPort: 8080
+  ingress:
+    enabled: true
+    className: nginx
+    annotations:
+      nginx.ingress.kubernetes.io/rewrite-target: /
+    hosts:
+      - host: lms.local
+        paths:
+          - path: /
+            pathType: Prefix
+    tls: []
+  replicaCount: 1
+  resources:
+    limits:
+      cpu: 500m
+      memory: 128Mi
+    requests:
+      cpu: 250m
+      memory: 64Mi
+  # Настройки подключения к БД
+  db:
+    host: postgresql
+    port: 5432
+    database: "{{ .Values.postgresql.auth.database }}"
+    username: "{{ .Values.postgresql.auth.username }}"
+    password: "{{ .Values.postgresql.auth.password }}"
+  # Настройки миграций
+  migrations:
+    enabled: true
+    command: ["dotnet", "LmsAndOnlineCoursesMarketplace.MVC.dll", "migrate"]
+  # Настройки cronjob
+  cronjob:
+    enabled: true
+    schedule: "0 3 * * *"
+    command: ["dotnet", "LmsAndOnlineCoursesMarketplace.MVC.dll", "migrate"]
+  # Настройки redis
+  redis:
+    host: redis-redis-lb.db.svc.cluster.local
+    port: 6379
+    password: ""
+# Настройки порта service
+service:
+  port: 80
+# Настройки serviceAccount
+serviceAccount:
+  create: true
+  name: ""
+# Настройки Ingress
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  hosts:
+    - host: new-lms.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+# Настройки HTTPRoute
+httpRoute:
+  enabled: false
+# Настройки Autoscaling
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
