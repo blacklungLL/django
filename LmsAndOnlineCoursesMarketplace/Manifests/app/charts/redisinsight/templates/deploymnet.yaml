@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "redisinsight.fullname" . }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ include "redisinsight.name" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "redisinsight.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "redisinsight.name" . }}
+    spec:
+      containers:
+      - name: redisinsight
+        image: redislabs/redisinsight:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: REDIS_HOST
+          value: {{ .Values.redis.host }}
+        - name: REDIS_PORT
+          value: "{{ .Values.redis.port }}"
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: redis-secret
+              key: redis-password

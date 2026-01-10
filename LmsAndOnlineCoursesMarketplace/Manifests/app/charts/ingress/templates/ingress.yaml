@@ -1,0 +1,22 @@
+{{- if .Values.lmsAppIngress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "ingress.fullname" . }}-lms-app
+  namespace: {{ .Values.lmsAppIngress.namespace }}
+  labels:
+    app: {{ include "ingress.name" . }}
+spec:
+  ingressClassName: {{ .Values.lmsAppIngress.ingressClassName }}
+  rules:
+  - host: {{ .Values.lmsAppIngress.host }}
+    http:
+      paths:
+      - path: {{ .Values.lmsAppIngress.path }}
+        pathType: {{ .Values.lmsAppIngress.pathType }}
+        backend:
+          service:
+            name: {{ .Values.lmsAppIngress.serviceName }}
+            port:
+              number: {{ .Values.lmsAppIngress.servicePort }}
+{{- end }}

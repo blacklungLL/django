@@ -1,3 +1,5 @@
+namespace: db
+
 replicaCount: 1
 
 image:
@@ -9,12 +11,10 @@ service:
   type: LoadBalancer
   port: 6379
 
-ingress:
-  enabled: false
-
 persistence:
   enabled: true
   size: 1Gi
   storageClass: standard
 
-redisPassword: ""
+auth:
+  password: "{{ vault kv get -field=password kv/redis }}"

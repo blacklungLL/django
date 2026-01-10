@@ -1,0 +1,19 @@
+lmsAppIngress:
+  enabled: true
+  ingressClassName: nginx
+  host: lms.local
+  path: /
+  pathType: Prefix
+  serviceName: lms-app-service
+  servicePort: 80
+  namespace: lms-backend
+
+redisInsightIngress:
+  enabled: true
+  ingressClassName: nginx
+  host: redis-insight.myredis.com
+  path: /
+  pathType: Prefix
+  serviceName: my-redisinsight
+  servicePort: 5000
+  namespace: db

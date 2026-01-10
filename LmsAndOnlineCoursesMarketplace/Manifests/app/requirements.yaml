@@ -1,0 +1,16 @@
+dependencies:
+  - name: redis
+    version: "0.1.0"
+    repository: "file://charts/redis"
+  - name: postgresql
+    version: "0.1.0"
+    repository: "file://charts/postgresql"
+  - name: redisinsight
+    version: "0.1.0"
+    repository: "file://charts/redisinsight"
+  - name: backend
+    version: "0.1.0"
+    repository: "file://charts/backend"
+  - name: ingress
+    version: "0.1.0"
+    repository: "file://charts/ingress"

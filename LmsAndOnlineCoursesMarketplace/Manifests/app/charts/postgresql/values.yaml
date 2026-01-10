@@ -1,0 +1,20 @@
+namespace: db
+
+auth:
+  username: postgres
+  password: "{{ vault kv get -field=password kv/postgresql }}"
+  database: MarketplaceDbs
+
+primary:
+  persistence:
+    enabled: true
+    size: 1Gi
+    storageClass: standard
+
+config:
+  host: postgres-headless-svc.db.svc.cluster.local
+  port: "5432"
+
+service:
+  ports:
+    postgresql: 5432

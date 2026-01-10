@@ -1,0 +1,18 @@
+dependencies:
+- name: redis
+  repository: file://charts/redis
+  version: 0.1.0
+- name: postgresql
+  repository: file://charts/postgresql
+  version: 0.1.0
+- name: redisinsight
+  repository: file://charts/redisinsight
+  version: 0.1.0
+- name: backend
+  repository: file://charts/backend
+  version: 0.1.0
+- name: ingress
+  repository: file://charts/ingress
+  version: 0.1.0
+digest: sha256:b5a4951664955da66d49632c4c65785832baa8b8130a77dc26875cbb2ad0dce2
+generated: "2026-01-09T23:50:16.223831+03:00"

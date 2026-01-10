@@ -1,0 +1,32 @@
+replicaCount: 3
+
+namespace: lms-backend
+
+image:
+  repository: 1blacklung1/lms-marketplace
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 80
+  targetPort: 8080
+
+env:
+  connectionStrings:
+    defaultConnection: "{{ vault kv get -field=connection-string kv/postgresql }}"
+
+livenessProbe:
+  path: /health
+  port: 8080
+  initialDelaySeconds: 15
+  periodSeconds: 60
+
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxUnavailable: 1
+
+migrations:
+  schedule: "*/1 * * * *"
+  command: ["dotnet", "LmsAndOnlineCoursesMarketplace.MVC.dll", "migrate"]
